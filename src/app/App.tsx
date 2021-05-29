@@ -3,7 +3,7 @@ import { Link, Route, Switch } from "react-router-dom"
 
 import "./index.css"
 
-import Home from "./Home"
+import Home from "./home/Home"
 import Main from "./main/Main"
 import NotFound from "./NotFound"
 

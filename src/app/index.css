@@ -36,16 +36,18 @@ html, body, #root, .app, .not-found {
 
 .page {
     flex-grow: 1;
+    overflow-y: auto;
+}
+
+.home {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .container, .not-found {
-    max-width: 1200px;
+    max-width: 1250px;
     margin: 0 auto;
-    padding: 0 64px;
-}
-
-.container {
-    margin-top: 36px;
+    padding: 64px;
 }
 
 .not-found {
