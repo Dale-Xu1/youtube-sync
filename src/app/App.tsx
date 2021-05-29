@@ -1,10 +1,11 @@
 import React from "react"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 
 import "./index.css"
 
 import Home from "./Home"
 import Main from "./main/Main"
+import NotFound from "./NotFound"
 
 class App extends React.Component
 {
@@ -12,15 +13,14 @@ class App extends React.Component
     public render(): React.ReactElement
     {
         return (
-            <Router>
-                <div className="app">
-                    <div className="header"></div>
-                    <Switch>
-                        <Route path="/video" component={Main} />
-                        <Route path="/" component={Home} />
-                    </Switch>
-                </div>
-            </Router>
+            <div className="app">
+                <div className="header"></div>
+                <Switch>
+                    <Route path="/home" component={Home} />
+                    <Route exact path="/" component={Main} />
+                    <Route component={NotFound} />
+                </Switch>
+            </div>
         )
     }
 

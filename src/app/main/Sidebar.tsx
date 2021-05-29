@@ -7,7 +7,7 @@ class Sidebar extends React.Component
     {
         return (
             <div className="sidebar">
-                
+                Sidebar
             </div>
         )
     }

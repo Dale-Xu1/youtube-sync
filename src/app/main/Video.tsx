@@ -21,7 +21,7 @@ class Video extends React.Component<Props>
     {
         // Redirect if no video id is provided
         let id = this.props.id
-        if (id.length === 0) return <Redirect to="/" />
+        if (id.length === 0) return <Redirect to="/home" />
 
         return (
             <div className="video">

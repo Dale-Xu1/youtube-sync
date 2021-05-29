@@ -6,7 +6,7 @@ class Home extends React.Component
     public render(): React.ReactElement
     {
         return (
-            <div className="home">
+            <div className="page">
                 <div className="container">
                     Home
                 </div>

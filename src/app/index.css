@@ -6,9 +6,11 @@
 
 body {
     background-color: #1e1e1e;
+    font-family: Roboto, Arial, sans-serif;
+    color: #ebebeb;
 }
 
-html, body, #root, .app {
+html, body, #root, .app, .not-found {
     height: 100%;
 }
 
@@ -20,18 +22,37 @@ html, body, #root, .app {
 
 .header {
     height: 24px;
-    background-color: #383B3D;
+    background-color: #383b3d;
 }
 
-.home {
-    margin-top: 36px;
+.page {
     flex-grow: 1;
-    font-family: Roboto, Arial, sans-serif;
-    color: #ebebeb;
 }
 
-.container {
+.container, .not-found {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 64px;
+}
+
+.container {
+    margin-top: 36px;
+}
+
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.not-found h1 {
+    font-size: 5rem;
+}
+
+.not-found h2 {
+    margin-bottom: 36px;
+}
+
+.not-found span {
+    color: #aaaaaa;
 }
