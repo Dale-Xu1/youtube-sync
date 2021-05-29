@@ -7,7 +7,14 @@ class Sidebar extends React.Component
     {
         return (
             <div className="sidebar">
-                Sidebar
+                <div className="sidebar-container">
+                    <h2>CONNECTED USERS</h2>
+                    <span>2</span>
+                </div>
+                <div className="code sidebar-container">
+                    <h3>CODE: </h3>
+                    <span>2g811Eo7K8U</span>
+                </div>
             </div>
         )
     }

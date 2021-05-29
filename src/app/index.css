@@ -21,8 +21,17 @@ html, body, #root, .app, .not-found {
 }
 
 .header {
-    height: 24px;
+    display: flex;
+    align-items: center;
+    height: 25px;
     background-color: #383b3d;
+}
+
+.header a {
+    color: #cccccc;
+    margin: 0 0 0 12px;
+    font-size: 0.8rem;
+    text-decoration: none;
 }
 
 .page {

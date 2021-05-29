@@ -1,5 +1,5 @@
 import React from "react"
-import { Route, Switch } from "react-router-dom"
+import { Link, Route, Switch } from "react-router-dom"
 
 import "./index.css"
 
@@ -14,7 +14,10 @@ class App extends React.Component
     {
         return (
             <div className="app">
-                <div className="header"></div>
+                <div className="header">
+                    <Link to="/home">Home</Link>
+                    <Link to="/about">About</Link>
+                </div>
                 <Switch>
                     <Route path="/home" component={Home} />
                     <Route exact path="/" component={Main} />

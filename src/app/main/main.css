@@ -4,8 +4,34 @@
 }
 
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 200px;
     background-color: #252526;
+}
+
+.sidebar-container {
+    padding: 16px 18px;
+}
+
+.sidebar h2 {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+}
+
+.sidebar span {
+    font-size: 0.8rem;
+}
+
+.code {
+    display: flex;
+    border-top: 1px solid #444444;
+}
+
+.code h3 {
+    font-size: 0.8rem;
+    margin-right: 6px;
 }
 
 .content {

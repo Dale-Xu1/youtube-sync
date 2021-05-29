@@ -32,7 +32,8 @@ class Video extends React.Component<Props>
                         height: "100%",
                         playerVars: {
                             autoplay: 1,
-                            modestbranding: 1
+                            modestbranding: 1,
+                            rel: 0
                         }
                     }}
                     onReady={this.onReady.bind(this)}
