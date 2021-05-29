@@ -1,4 +1,5 @@
 import React from "react"
+import { Redirect } from "react-router"
 import YouTube from "react-youtube"
 
 interface Props
@@ -18,6 +19,10 @@ class Video extends React.Component<Props>
 
     public render(): React.ReactElement
     {
+        // Redirect if no video id is provided
+        let id = this.props.id
+        if (id.length === 0) return <Redirect to="/" />
+
         return (
             <div className="video">
                 <YouTube
