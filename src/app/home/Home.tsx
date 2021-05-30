@@ -1,41 +1,56 @@
+import axios from "axios"
 import React from "react"
 
 import "./home.css"
 
+import { ThumbnailData } from "../../server/session/SessionManager"
 import NewVideo from "./NewVideo"
 import Thumbnail from "./Thumbnail"
 
-class Home extends React.Component
+interface Props { }
+
+interface State
 {
+
+    thumbnails: ThumbnailData[]
+
+}
+
+class Home extends React.Component<Props, State>
+{
+
+    public state: State =
+    {
+        thumbnails: []
+    }
+
 
     public constructor()
     {
         super({})
+        this.fetchData()
+    }
 
-        // TODO: Get all sessions
+    private async fetchData(): Promise<void>
+    {
+        let response = await axios.get("/list")
+        this.setState({ thumbnails: response.data })
     }
 
     public render(): React.ReactElement
     {
+        // Convert thumbnail data to elements
+        let thumbnails: React.ReactElement[] = []
+        for (let data of this.state.thumbnails)
+        {
+            thumbnails.push(<Thumbnail id={data.id} title={data.title} image={data.image} key={data.id}/>)
+        }
+
         return (
             <div className="page">
                 <div className="home container">
                     <NewVideo />
-                    <Thumbnail
-                        id="0gpFsnCz3HQ"
-                        title={"\"Sunsprite's Eulogy\" | Passerine animatic"}
-                        image="https://i.ytimg.com/vi/0gpFsnCz3HQ/hqdefault.jpg"
-                    />
-                    <Thumbnail
-                        id="2g811Eo7K8U"
-                        title="cat falling"
-                        image="https://i.ytimg.com/vi/2g811Eo7K8U/hqdefault.jpg"
-                    />
-                    <Thumbnail
-                        id="dQw4w9WgXcQ"
-                        title="Rick Astley - Never Gonna Give You Up (Video)"
-                        image="https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
-                    />
+                    {thumbnails}
                 </div>
             </div>
         )

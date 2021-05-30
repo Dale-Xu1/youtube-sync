@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { MouseEvent } from "react"
 import { RouteComponentProps, withRouter } from "react-router"
+
 import Form from "./Form"
 
 interface State
@@ -41,10 +42,9 @@ class NewVideo extends React.Component<RouteComponentProps, State>
 
         // Create session
         let response = await axios.post("/session", { id })
-        let data = response.data
+        let code: string = response.data
 
-        // TODO: Join session
-        // this.joinSession()
+        this.joinSession(code)
     }
 
     private joinSession(code: string): void

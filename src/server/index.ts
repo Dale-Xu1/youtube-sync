@@ -28,6 +28,10 @@ class App
         this.io = new Server(server)
 
         this.io.on("connection", this.connection.bind(this))
+
+        this.sessions.create("0gpFsnCz3HQ")
+        this.sessions.create("2g811Eo7K8U")
+        this.sessions.create("dQw4w9WgXcQ")
     }
 
 

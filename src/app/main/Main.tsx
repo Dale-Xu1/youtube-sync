@@ -28,6 +28,11 @@ class Main extends React.Component<RouteComponentProps>
             return
         }
 
+        this.connect(id)
+    }
+
+    private async connect(id: string): Promise<void>
+    {
         // TODO: Use id to connect to socket (and encapsulate in object) rather than sending id to components
         this.id = id
     }
