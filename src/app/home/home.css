@@ -35,7 +35,7 @@
     justify-content: center;
     align-items: center;
     background-color: #252526;
-    transition: background-color 0.2s ease-in;
+    transition: background-color 0.1s ease-in;
     cursor: pointer;
 }
 
@@ -67,4 +67,96 @@
     width: 100%;
     height: 2px;
     transform: translateY(-50%);
+}
+
+.background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #121212b2;
+    transition: 0.1s ease-in;
+}
+
+.hidden {
+    visibility: hidden;
+    background-color: transparent;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    padding: 36px 24px;
+    background-color: #252526;
+    transition: 0.1s ease-in;
+}
+
+.popup-hidden {
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.popup h2 {
+    align-self: center;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form span {
+    margin: 18px 0 6px 0;
+    font-size: 0.8rem;
+}
+
+form input {
+    flex-grow: 1;
+    background-color: #383b3d;
+    border: none;
+    color: #cccccc;
+    padding: 4px;
+}
+
+form input::placeholder {
+    color: #969696;
+}
+
+form input:focus {
+    outline: 1px solid #66a7f1;
+}
+
+form button {
+    width: 24px;
+    margin-left: -24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.form-content {
+    display: flex;
+}
+
+.arrow {
+    display: inline-block;
+    padding: 3px;
+    border: solid #969696;
+    border-width: 2px 2px 0 0;
+    transform: rotate(45deg) translate(-16%, 16%);
+}
+
+span.info {
+    margin-top: 120px;
+    padding-top: 12px;
+    border-top: 1px solid #444444;
+    color: #b8b8b8;
+    font-size: 0.8rem;
 }

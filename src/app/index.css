@@ -6,6 +6,9 @@
 
 body {
     background-color: #1e1e1e;
+}
+
+body, a {
     font-family: Roboto, Arial, sans-serif;
     color: #ebebeb;
 }
@@ -20,6 +23,10 @@ html, body, #root, .app, .not-found {
     align-items: stretch;
 }
 
+a {
+    text-decoration: none;
+}
+
 .header {
     display: flex;
     align-items: center;
@@ -31,7 +38,6 @@ html, body, #root, .app, .not-found {
     color: #cccccc;
     margin: 0 0 0 12px;
     font-size: 0.8rem;
-    text-decoration: none;
 }
 
 .page {

@@ -1,7 +1,7 @@
 import React from "react"
-import { RouteComponentProps, withRouter } from "react-router-dom"
+import { Link } from "react-router-dom"
 
-interface Props extends RouteComponentProps
+interface Props
 {
 
     id: string
@@ -14,23 +14,20 @@ interface Props extends RouteComponentProps
 class Thumbnail extends React.Component<Props>
 {
 
-    private onMouseDown(): void
-    {
-        this.props.history.push(`/video?id=${this.props.id}`)
-    }
-
     public render(): React.ReactElement
     {
         return (
             <div className="thumbnail">
-                <div className="thumbnail-content" onMouseDown={this.onMouseDown.bind(this)}>
-                    <img src={this.props.image} alt="" />
-                    <span>{this.props.title}</span>
-                </div>
+                <Link to={`/video?id=${this.props.id}`}>
+                    <div className="thumbnail-content">
+                        <img src={this.props.image} alt="" />
+                        <span>{this.props.title}</span>
+                    </div>
+                </Link>
             </div>
         )
     }
 
 }
 
-export default withRouter(Thumbnail)
+export default Thumbnail
