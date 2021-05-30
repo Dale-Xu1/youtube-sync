@@ -1,6 +1,13 @@
 import React from "react"
 
-class Sidebar extends React.Component
+interface Props
+{
+
+    id: string
+
+}
+
+class Sidebar extends React.Component<Props>
 {
 
     public render(): React.ReactElement
@@ -12,8 +19,8 @@ class Sidebar extends React.Component
                     <span>2</span>
                 </div>
                 <div className="code sidebar-container">
-                    <h3>CODE: </h3>
-                    <span>2g811Eo7K8U</span>
+                    <h3>CODE:</h3>
+                    <span>{this.props.id}</span>
                 </div>
             </div>
         )

@@ -15,12 +15,12 @@ class App extends React.Component
         return (
             <div className="app">
                 <div className="header">
-                    <Link to="/home">Home</Link>
+                    <Link to="/">Home</Link>
                     <Link to="/about">About</Link>
                 </div>
                 <Switch>
-                    <Route path="/home" component={Home} />
-                    <Route exact path="/" component={Main} />
+                    <Route path="/video" component={Main} />
+                    <Route exact path="/" component={Home} />
                     <Route component={NotFound} />
                 </Switch>
             </div>

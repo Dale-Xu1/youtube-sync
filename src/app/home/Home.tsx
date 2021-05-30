@@ -14,8 +14,16 @@ class Home extends React.Component
             <div className="page">
                 <div className="home container">
                     <NewVideo />
-                    <Thumbnail title="cat falling" image="https://i.ytimg.com/vi/2g811Eo7K8U/mqdefault.jpg" />
-                    <Thumbnail title="Rick Astley - Never Gonna Give You Up (Video)" image="https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg" />
+                    <Thumbnail
+                        id="2g811Eo7K8U"
+                        title="cat falling"
+                        image="https://i.ytimg.com/vi/2g811Eo7K8U/mqdefault.jpg"
+                    />
+                    <Thumbnail
+                        id="dQw4w9WgXcQ"
+                        title="Rick Astley - Never Gonna Give You Up (Video)"
+                        image="https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg"
+                    />
                 </div>
             </div>
         )
