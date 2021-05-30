@@ -1,3 +1,4 @@
+import axios from "axios"
 import React, { MouseEvent } from "react"
 import { RouteComponentProps, withRouter } from "react-router"
 import Form from "./Form"
@@ -36,11 +37,19 @@ class NewVideo extends React.Component<RouteComponentProps, State>
 
     private async createSession(id: string): Promise<void>
     {
+        if (id.length === 0) return
 
+        // Create session
+        let response = await axios.post("/session", { id })
+        let data = response.data
+
+        // TODO: Join session
+        // this.joinSession()
     }
 
     private joinSession(code: string): void
     {
+        if (code.length === 0) return
         this.props.history.push(`/video?id=${code}`)
     }
 
@@ -55,11 +64,11 @@ class NewVideo extends React.Component<RouteComponentProps, State>
                     <div className="plus"></div>
                 </div>
                 <div
-                    className={"background" + (popup ? "" : " hidden")}
+                    className={`background${popup ? "" : " hidden"}`}
                     onMouseDown={this.hidePopup.bind(this)}
                 >
                     <div
-                        className={"popup" + (popup ? "" : " popup-hidden")}
+                        className={`popup${popup ? "" : " popup-hidden"}`}
                         onMouseDown={this.stopPropagation.bind(this)}
                     >
                         <h2>WATCH A VIDEO</h2>
