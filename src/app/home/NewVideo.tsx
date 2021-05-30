@@ -42,7 +42,7 @@ class NewVideo extends React.Component<RouteComponentProps, State>
 
         // Create session
         let response = await axios.post("/session", { id })
-        let code: string = response.data
+        let code: string = response.data.id
 
         this.joinSession(code)
     }

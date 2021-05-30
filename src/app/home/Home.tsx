@@ -7,8 +7,6 @@ import { ThumbnailData } from "../../server/session/SessionManager"
 import NewVideo from "./NewVideo"
 import Thumbnail from "./Thumbnail"
 
-interface Props { }
-
 interface State
 {
 
@@ -16,7 +14,7 @@ interface State
 
 }
 
-class Home extends React.Component<Props, State>
+class Home extends React.Component<{}, State>
 {
 
     public state: State =

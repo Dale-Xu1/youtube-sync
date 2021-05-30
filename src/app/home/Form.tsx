@@ -17,7 +17,7 @@ interface State
 
 }
 
-class Form extends React.Component<Props>
+class Form extends React.Component<Props, State>
 {
 
     public state: State =
