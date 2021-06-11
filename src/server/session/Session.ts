@@ -1,5 +1,7 @@
 import axios from "axios"
 
+import SessionManager from "./SessionManager"
+
 class Session
 {
 
@@ -11,7 +13,7 @@ class Session
     public users = 0
 
 
-    public constructor(public id: string, public video: string)
+    public constructor(private sessions: SessionManager, public id: string, public video: string)
     {
         this.initialize()
     }
@@ -38,7 +40,9 @@ class Session
     public disconnect(): void
     {
         this.users--
-        // this.users <= 0 // TODO: Delete session
+
+        // Delete if no users are left
+        if (this.users <= 0) this.sessions.delete(this.id)
     }
 
 }

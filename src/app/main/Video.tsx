@@ -1,12 +1,13 @@
 import React from "react"
 import YouTube from "react-youtube"
+import { Socket } from "socket.io-client"
 
-import Connection from "./Connection"
+import { InitialData } from "../../server/Connection"
 
 interface Props
 {
 
-    connection: Connection
+    socket: Socket
 
 }
 
@@ -28,19 +29,19 @@ class Video extends React.Component<Props, State>
 
     public componentDidMount(): void
     {
-        let connection = this.props.connection
-        connection.socket.on("video", this.updateVideo.bind(this))
+        let socket = this.props.socket
+        socket.on("initialize", this.initialize.bind(this))
     }
 
-    private updateVideo(id: string): void
+    private initialize(data: InitialData): void
     {
-        this.setState({ id })
+        this.setState({ id: data.id })
     }
 
     private onReady(event: YT.PlayerEvent): void
     {
         let player = event.target
-        console.log(this.props.connection)
+        // TODO: Encapsulate player and socket stuff into object
     }
 
     public render(): React.ReactElement | null

@@ -2,6 +2,14 @@ import { Socket } from "socket.io"
 
 import Session from "./session/Session"
 
+export interface InitialData
+{
+
+    users: number
+    id: string
+
+}
+
 class Connection
 {
     
@@ -20,8 +28,12 @@ class Connection
         socket.to(this.room).emit("users", session.users)
 
         // Send user information
-        socket.emit("users", session.users)
-        socket.emit("video", session.video)
+        let data: InitialData =
+        {
+            id: session.video,
+            users: session.users
+        }
+        socket.emit("initialize", data)
 
         socket.on("disconnect", this.disconnect.bind(this))
     }

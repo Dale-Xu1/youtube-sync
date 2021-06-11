@@ -1,11 +1,12 @@
 import React from "react"
+import { Socket } from "socket.io-client"
 
-import Connection from "./Connection"
+import { InitialData } from "../../server/Connection"
 
 interface Props
 {
 
-    connection: Connection
+    socket: Socket
     code: string
 
 }
@@ -28,8 +29,15 @@ class Sidebar extends React.Component<Props, State>
 
     public componentDidMount(): void
     {
-        let connection = this.props.connection
-        connection.socket.on("users", this.updateUsers.bind(this))
+        let socket = this.props.socket
+
+        socket.on("initialize", this.initialize.bind(this))
+        socket.on("users", this.updateUsers.bind(this))
+    }
+
+    private initialize(data: InitialData): void
+    {
+        this.updateUsers(data.users)
     }
 
     private updateUsers(users: number): void

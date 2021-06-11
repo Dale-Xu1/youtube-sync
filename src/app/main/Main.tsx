@@ -1,17 +1,18 @@
 import query from "query-string"
 import React from "react"
 import { RouteComponentProps, withRouter } from "react-router-dom"
+import { io, Socket } from "socket.io-client"
 
 import "./main.css"
 
 import Sidebar from "./Sidebar"
 import Video from "./Video"
-import Connection from "./Connection"
+import { JoinData } from "../../server"
 
 interface State
 {
 
-    connection: Connection | null
+    socket: Socket | null
 
 }
 
@@ -20,7 +21,7 @@ export class Main extends React.Component<RouteComponentProps, State>
 
     public state: State =
     {
-        connection: null
+        socket: null
     }
 
     private code!: string
@@ -47,29 +48,34 @@ export class Main extends React.Component<RouteComponentProps, State>
     public componentDidMount(): void
     {
         // Connect to session
-        let connection = new Connection(this, this.code)
-        this.setState({ connection })
+        let socket = io()
+        
+        // Join session
+        let join: JoinData = { code: this.code }
+        socket.emit("join", join)
+
+        this.setState({ socket })
     }
 
     public componentWillUnmount(): void
     {
-        let connection = this.state.connection
-        if (connection === null) return
+        let socket = this.state.socket
+        if (socket === null) return
 
         // Disconnect from session
-        connection.disconnect()
+        socket.disconnect()
     }
 
     public render(): React.ReactElement | null
     {
-        let connection = this.state.connection
-        if (connection === null) return null
+        let socket = this.state.socket
+        if (socket === null) return null
 
         return (
             <div className="main">
-                <Sidebar connection={connection} code={this.code} />
+                <Sidebar socket={socket} code={this.code} />
                 <div className="content">
-                    <Video connection={connection} />
+                    <Video socket={socket} />
                 </div>
             </div>
         )

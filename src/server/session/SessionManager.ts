@@ -13,7 +13,7 @@ export interface ThumbnailData
 class SessionManager
 {
 
-    private static characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    private static characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
 
 
     private sessions = new Map<string, Session>()
@@ -41,7 +41,7 @@ class SessionManager
     public create(video: string): string
     {
         let id = this.generateId()
-        let session = new Session(id, video)
+        let session = new Session(this, id, video)
 
         this.sessions.set(id, session)
         return id
@@ -65,19 +65,9 @@ class SessionManager
     }
 
 
-    public connect(id: string): void
+    public delete(id: string): void
     {
-        this.sessions.get(id)?.connect()
-    }
-
-    public disconnect(id: string): void
-    {
-        // Delete session if last user disconnected
-        let session = this.sessions.get(id)
-        if (session != null && session.disconnect())
-        {
-            this.sessions.delete(id)
-        }
+        this.sessions.delete(id)
     }
 
 }
