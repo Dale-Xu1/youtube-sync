@@ -3,6 +3,14 @@ import dotenv from "dotenv"
 import { Server, Socket } from "socket.io"
 
 import SessionManager from "./session/SessionManager"
+import Connection from "./Connection"
+
+export interface JoinData
+{
+
+    code: string
+
+}
 
 class App
 {
@@ -18,9 +26,7 @@ class App
         this.app.use(express.static("build"))
         this.app.use(express.json())
 
-        this.app.get("/list", this.getList.bind(this))
-
-        this.app.get("/session", this.getSession.bind(this))
+        this.app.get("/sessions", this.getSessions.bind(this))
         this.app.post("/session", this.createSession.bind(this))
 
         // Start server
@@ -35,28 +41,9 @@ class App
     }
 
 
-    private getList(req: Request, res: Response): void
+    private getSessions(req: Request, res: Response): void
     {
-        res.send(this.sessions.list())
-    }
-
-    private getSession(req: Request, res: Response): void
-    {
-        // Make sure id parameter is a string
-        let id = req.query.id
-        if (typeof id !== "string")
-        {
-            res.status(400).send({ error: "id parameter is required" })
-            return
-        }
-
-        let session = this.sessions.get(id)
-        if (session === null)
-        {
-            // Session doesn't exist
-            res.status(404).send({ error: "Session not found" })
-        }
-        else res.send(session)
+        res.send(this.sessions.thumbnails())
     }
 
     private createSession(req: Request, res: Response): void
@@ -68,7 +55,14 @@ class App
 
     private connection(socket: Socket): void
     {
+        socket.on("join", (data: JoinData) =>
+        {
+            // Initialize connection once user specifies code
+            let session = this.sessions.get(data.code)
+            if (session === null) return
 
+            new Connection(socket, session)
+        })
     }
 
 }

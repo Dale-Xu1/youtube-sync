@@ -10,14 +10,6 @@ export interface ThumbnailData
 
 }
 
-export interface SessionData
-{
-
-    video: string
-    users: number
-
-}
-
 class SessionManager
 {
 
@@ -27,33 +19,39 @@ class SessionManager
     private sessions = new Map<string, Session>()
 
 
-    public list(): ThumbnailData[]
+    public thumbnails(): ThumbnailData[]
     {
         let thumbnails: ThumbnailData[] = []
         for (let [id, session] of this.sessions.entries())
         {
             // Add session to list if its data is ready
-            if (session.isPending()) continue
-            thumbnails.push({ id, title: session.getTitle(), image: session.getImage() })
+            if (session.pending) continue
+            thumbnails.push({ id, title: session.title, image: session.image })
         }
 
         return thumbnails
     }
 
-    public get(id: string): SessionData | null
+
+    public get(id: string): Session | null
     {
-        let session = this.sessions.get(id)
-        if (session == null) return null
-
-        return { video: session.getVideo(), users: session.getUsers() }
+        return this.sessions.get(id) ?? null
     }
-
+    
     public create(video: string): string
     {
-        let session = new Session(video)
+        let id = this.generateId()
+        let session = new Session(id, video)
+
+        this.sessions.set(id, session)
+        return id
+    }
+
+    private generateId(): string
+    {
         let id = ""
 
-        // Generate random id
+        // Generate random ID
         let characters = SessionManager.characters
         for (let i = 0; i < 8; i++)
         {
@@ -61,7 +59,8 @@ class SessionManager
             id += characters[index]
         }
 
-        this.sessions.set(id, session)
+        // Try again if ID exists
+        if (this.sessions.has(id)) return this.generateId()
         return id
     }
 

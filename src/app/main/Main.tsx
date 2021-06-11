@@ -6,51 +6,70 @@ import "./main.css"
 
 import Sidebar from "./Sidebar"
 import Video from "./Video"
+import Connection from "./Connection"
 
-class Main extends React.Component<RouteComponentProps>
+interface State
 {
 
-    private id: string | null = null
+    connection: Connection | null
+
+}
+
+export class Main extends React.Component<RouteComponentProps, State>
+{
+
+    public state: State =
+    {
+        connection: null
+    }
+
+    private code!: string
 
 
     public constructor(props: RouteComponentProps)
     {
         super(props)
         
-        let id = query.parse(this.props.location.search).id
+        let code = query.parse(this.props.location.search).id
 
         // Select first id
-        if (id instanceof Array) id = id[0]
-        if (id == null)
+        if (code instanceof Array) code = code[0]
+        if (code == null)
         {
             // Redirect to home if no id is provided
             this.props.history.push("/")
             return
         }
-
-        this.connect(id)
+        
+        this.code = code
     }
 
-    private async connect(id: string): Promise<void>
+    public componentDidMount(): void
     {
-        // TODO: Use id to connect to socket (and encapsulate in object) rather than sending id to components
-        this.id = id
+        // Connect to session
+        let connection = new Connection(this, this.code)
+        this.setState({ connection })
     }
 
     public componentWillUnmount(): void
     {
+        let connection = this.state.connection
+        if (connection === null) return
 
+        // Disconnect from session
+        connection.disconnect()
     }
 
     public render(): React.ReactElement | null
     {
-        if (this.id === null) return null
+        let connection = this.state.connection
+        if (connection === null) return null
 
         return (
             <div className="main">
-                <Sidebar id={this.id} />
+                <Sidebar connection={connection} code={this.code} />
                 <div className="content">
-                    <Video id={this.id} />
+                    <Video connection={connection} />
                 </div>
             </div>
         )

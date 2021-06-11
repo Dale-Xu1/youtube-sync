@@ -3,20 +3,20 @@ import axios from "axios"
 class Session
 {
 
-    private pending = true
+    public pending = true
 
-    private title!: string
-    private image!: string
+    public title!: string
+    public image!: string
 
-    private users = 0
+    public users = 0
 
 
-    public constructor(private video: string)
+    public constructor(public id: string, public video: string)
     {
-        this.fetchData()
+        this.initialize()
     }
 
-    private async fetchData(): Promise<void>
+    public async initialize(): Promise<void>
     {
         // Get video data from YouTube API
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${this.video}&key=${process.env.YOUTUBE}`)
@@ -25,33 +25,8 @@ class Session
         this.title = data.title
         this.image = data.thumbnails.high.url
 
+        // Data can now be freely accessed
         this.pending = false
-    }
-
-
-    public isPending(): boolean
-    {
-        return this.pending
-    }
-
-    public getTitle(): string
-    {
-        return this.title
-    }
-
-    public getImage(): string
-    {
-        return this.image
-    }
-
-    public getVideo(): string
-    {
-        return this.video
-    }
-
-    public getUsers(): number
-    {
-        return this.users
     }
 
 
@@ -60,10 +35,10 @@ class Session
         this.users++
     }
 
-    public disconnect(): boolean
+    public disconnect(): void
     {
         this.users--
-        return this.users <= 0
+        // this.users <= 0 // TODO: Delete session
     }
 
 }

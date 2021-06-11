@@ -21,18 +21,27 @@ class Home extends React.Component<{}, State>
     {
         thumbnails: []
     }
+    
+    private mounted = false
 
 
-    public constructor()
+    public constructor(props: {})
     {
-        super({})
+        super(props)
         this.fetchData()
     }
 
     private async fetchData(): Promise<void>
     {
-        let response = await axios.get("/list")
-        this.setState({ thumbnails: response.data })
+        let response = await axios.get("/sessions")
+
+        if (this.mounted) this.setState({ thumbnails: response.data })
+        else this.state.thumbnails = response.data
+    }
+
+    public componentDidMount(): void
+    {
+        this.mounted = true
     }
 
     public render(): React.ReactElement
