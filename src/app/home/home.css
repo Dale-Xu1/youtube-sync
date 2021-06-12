@@ -114,7 +114,7 @@ form {
 }
 
 form span {
-    margin: 18px 0 6px 0;
+    margin: 20px 0 7px 0;
     font-size: 0.8rem;
 }
 
@@ -123,7 +123,7 @@ form input {
     background-color: #383b3d;
     border: none;
     color: #cccccc;
-    padding: 4px;
+    padding: 4px 6px;
 }
 
 form input::placeholder {

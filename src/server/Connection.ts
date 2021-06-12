@@ -8,6 +8,9 @@ export interface InitialData
     users: number
     id: string
 
+    paused: boolean
+    time: number
+
 }
 
 class Connection
@@ -31,7 +34,9 @@ class Connection
         let data: InitialData =
         {
             id: session.video,
-            users: session.users
+            users: session.users,
+            paused: session.paused,
+            time: session.time
         }
         socket.emit("initialize", data)
 

@@ -52,9 +52,14 @@ export class Main extends React.Component<RouteComponentProps, State>
         
         // Join session
         let join: JoinData = { code: this.code }
-        socket.emit("join", join)
+        socket.emit("join", join, this.error.bind(this))
 
         this.setState({ socket })
+    }
+
+    private error(): void
+    {
+        this.props.history.push("/")
     }
 
     public componentWillUnmount(): void

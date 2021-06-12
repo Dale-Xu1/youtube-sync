@@ -3,6 +3,7 @@ import YouTube from "react-youtube"
 import { Socket } from "socket.io-client"
 
 import { InitialData } from "../../server/Connection"
+import Connection from "./Connection"
 
 interface Props
 {
@@ -26,6 +27,8 @@ class Video extends React.Component<Props, State>
         id: null
     }
 
+    private data!: InitialData
+
 
     public componentDidMount(): void
     {
@@ -35,13 +38,19 @@ class Video extends React.Component<Props, State>
 
     private initialize(data: InitialData): void
     {
+        this.data = data
         this.setState({ id: data.id })
     }
 
     private onReady(event: YT.PlayerEvent): void
     {
         let player = event.target
-        // TODO: Encapsulate player and socket stuff into object
+
+        // Initialize player
+        if (this.data.paused) player.pauseVideo()
+        player.seekTo(this.data.time, true)
+
+        new Connection(this.props.socket, player)
     }
 
     public render(): React.ReactElement | null

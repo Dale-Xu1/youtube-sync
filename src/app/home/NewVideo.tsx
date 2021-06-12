@@ -73,12 +73,12 @@ class NewVideo extends React.Component<RouteComponentProps, State>
                     >
                         <h2>WATCH A VIDEO</h2>
                         <Form
-                            title="Create session"
+                            title="Create Session"
                             placeholder="Video ID"
                             onSubmit={this.createSession.bind(this)}
                         />
                         <Form
-                            title="Join through code"
+                            title="Join Session"
                             placeholder="Code"
                             onSubmit={this.joinSession.bind(this)}
                         />

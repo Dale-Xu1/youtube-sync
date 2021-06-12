@@ -12,9 +12,13 @@ class Session
 
     public users = 0
 
+    public paused = true
+    public time = 0
+
 
     public constructor(private sessions: SessionManager, public id: string, public video: string)
     {
+        this.startDelete() // Give user time to connect
         this.initialize()
     }
 
@@ -34,15 +38,28 @@ class Session
 
     public connect(): void
     {
+        clearInterval(this.timer)
         this.users++
     }
 
     public disconnect(): void
     {
         this.users--
+        if (this.users <= 0) this.startDelete() // Delete if no users are left
+    }
 
-        // Delete if no users are left
-        if (this.users <= 0) this.sessions.delete(this.id)
+
+    private timer!: NodeJS.Timeout
+
+    private startDelete(): void
+    {
+        // Delete after 30 seconds
+        this.timer = setInterval(this.delete.bind(this), 30000)
+    }
+
+    private delete(): void
+    {
+        this.sessions.delete(this.id)
     }
 
 }

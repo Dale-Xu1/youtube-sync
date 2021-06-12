@@ -55,11 +55,11 @@ class App
 
     private connection(socket: Socket): void
     {
-        socket.on("join", (data: JoinData) =>
+        socket.on("join", (data: JoinData, error: () => void) =>
         {
             // Initialize connection once user specifies code
             let session = this.sessions.get(data.code)
-            if (session === null) return
+            if (session === null) return void error()
 
             new Connection(socket, session)
         })
