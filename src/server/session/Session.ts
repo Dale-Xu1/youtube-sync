@@ -38,7 +38,7 @@ class Session
 
     public connect(): void
     {
-        clearInterval(this.timer)
+        clearTimeout(this.timeout)
         this.users++
     }
 
@@ -49,12 +49,12 @@ class Session
     }
 
 
-    private timer!: NodeJS.Timeout
+    private timeout!: NodeJS.Timeout
 
     private startDelete(): void
     {
         // Delete after 30 seconds
-        this.timer = setInterval(this.delete.bind(this), 30000)
+        this.timeout = setTimeout(this.delete.bind(this), 30000)
     }
 
     private delete(): void

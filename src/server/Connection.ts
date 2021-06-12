@@ -40,9 +40,24 @@ class Connection
         }
         socket.emit("initialize", data)
 
+        socket.on("play", this.play.bind(this))
+        socket.on("pause", this.pause.bind(this))
+
         socket.on("disconnect", this.disconnect.bind(this))
     }
 
+
+    private play(): void
+    {
+        this.session.paused = false
+        this.socket.to(this.room).emit("play")
+    }
+
+    private pause(time: number): void
+    {
+        this.session.paused = true
+        this.socket.to(this.room).emit("pause", time)
+    }
 
     private disconnect(): void
     {
