@@ -45,6 +45,7 @@ export class Main extends React.Component<RouteComponentProps, State>
         this.code = code
     }
 
+
     public componentDidMount(): void
     {
         // Connect to session
@@ -62,15 +63,7 @@ export class Main extends React.Component<RouteComponentProps, State>
         this.props.history.push("/")
     }
 
-    public componentWillUnmount(): void
-    {
-        let socket = this.state.socket
-        if (socket === null) return
-
-        // Disconnect from session
-        socket.disconnect()
-    }
-
+    
     public render(): React.ReactElement | null
     {
         let socket = this.state.socket

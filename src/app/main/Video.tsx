@@ -27,6 +27,8 @@ class Video extends React.Component<Props, State>
         id: null
     }
 
+    private connection: Connection | null = null
+
     private start = Date.now()
     private data!: InitialData
 
@@ -60,8 +62,16 @@ class Video extends React.Component<Props, State>
             player.seekTo(time, true)
         }
 
-        new Connection(this.props.socket, player)
+        this.connection = new Connection(this.props.socket, player)
     }
+
+
+    public componentWillUnmount(): void
+    {
+        if (this.connection === null) return
+        this.connection.disconnect()
+    }
+    
 
     public render(): React.ReactElement | null
     {

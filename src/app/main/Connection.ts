@@ -12,32 +12,55 @@ class Connection
     }
 
 
-    private play(): void
+    private play(time: number): void
     {
+        this.ignore = true
+
+        this.player.seekTo(time, true)
         this.player.playVideo()
     }
 
     private pause(time: number): void
     {
-        this.player.seekTo(time, true)
+        this.ignore = true
+
         this.player.pauseVideo()
+        this.player.seekTo(time, true)
     }
+
+
+    private ignore = false
 
     private stateChange(event: YT.OnStateChangeEvent): void
     {
+        let time = this.player.getCurrentTime()
         switch (event.data)
         {
-            case YT.PlayerState.PLAYING: this.socket.emit("play"); break
-            case YT.PlayerState.PAUSED:
+            case YT.PlayerState.PLAYING:
             {
-                let time = this.player.getCurrentTime()
-                this.socket.emit("pause", time)
-                
+                if (!this.ignore) this.socket.emit("play", time)
                 break
             }
+
+            case YT.PlayerState.PAUSED:
+            {
+                if (!this.ignore) this.socket.emit("pause", time)
+                break
+            }
+
+            default: return
         }
+
+        this.ignore = false
     }
 
+
+    public disconnect(): void
+    {
+        // Disconnect from session
+        this.socket.disconnect()
+    }
+    
 }
 
 export default Connection

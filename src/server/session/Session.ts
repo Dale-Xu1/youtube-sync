@@ -53,9 +53,11 @@ class Session
     }
 
 
-    public play(): void
+    public play(time: number): void
     {
         this.start = Date.now()
+        this.offset = time
+
         this.paused = false
     }
 

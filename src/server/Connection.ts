@@ -47,10 +47,10 @@ class Connection
     }
 
 
-    private play(): void
+    private play(time: number): void
     {
-        this.session.play()
-        this.socket.to(this.room).emit("play")
+        this.session.play(time)
+        this.socket.to(this.room).emit("play", time)
     }
 
     private pause(time: number): void
