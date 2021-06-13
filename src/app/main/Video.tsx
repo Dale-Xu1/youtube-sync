@@ -27,6 +27,7 @@ class Video extends React.Component<Props, State>
         id: null
     }
 
+    private start = Date.now()
     private data!: InitialData
 
 
@@ -48,7 +49,9 @@ class Video extends React.Component<Props, State>
 
         // Initialize player
         if (this.data.paused) player.pauseVideo()
-        player.seekTo(this.data.time, true)
+
+        let time = this.data.time + (Date.now() - this.start) / 1000 // Compensate for loading time
+        player.seekTo(time, true)
 
         new Connection(this.props.socket, player)
     }

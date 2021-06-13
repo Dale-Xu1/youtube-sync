@@ -11,9 +11,7 @@ class Session
     public image!: string
 
     public users = 0
-
     public paused = true
-    public time = 0
 
 
     public constructor(private sessions: SessionManager, public id: string, public video: string)
@@ -33,6 +31,38 @@ class Session
 
         // Data can now be freely accessed
         this.pending = false
+    }
+
+
+    private start = Date.now()
+    private offset = 0
+    
+    public get time(): number
+    {
+        if (this.paused) return this.offset
+
+        // Calculate current time
+        let time = (Date.now() - this.start) / 1000
+        return this.offset + time
+    }
+
+    public set time(value: number)
+    {
+        this.start = Date.now()
+        this.offset = value
+    }
+
+
+    public play(): void
+    {
+        this.start = Date.now()
+        this.paused = false
+    }
+
+    public pause(time: number): void
+    {
+        this.offset = time
+        this.paused = true
     }
 
 

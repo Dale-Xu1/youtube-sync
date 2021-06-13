@@ -49,16 +49,17 @@ class Connection
 
     private play(): void
     {
-        this.session.paused = false
+        this.session.play()
         this.socket.to(this.room).emit("play")
     }
 
     private pause(time: number): void
     {
-        this.session.paused = true
+        this.session.pause(time)
         this.socket.to(this.room).emit("pause", time)
     }
 
+    
     private disconnect(): void
     {
         this.session.disconnect()
