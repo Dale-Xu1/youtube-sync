@@ -24,7 +24,7 @@ class Connection
     {
         this.ignore = true
 
-        this.player.pauseVideo()
+        this.player.pauseVideo() // It's really important this is first for some reason
         this.player.seekTo(time, true)
     }
 

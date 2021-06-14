@@ -24,6 +24,17 @@ class Session
     {
         // Get video data from YouTube API
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${this.video}&key=${process.env.YOUTUBE}`)
+        let items = response.data.items
+        
+        if (items.length === 0)
+        {
+            // Video doesn't exist
+            clearTimeout(this.timeout)
+            this.delete()
+
+            return
+        }
+        
         let data = response.data.items[0].snippet
 
         this.title = data.title

@@ -40,6 +40,16 @@ class NewVideo extends React.Component<RouteComponentProps, State>
     {
         if (id.length === 0) return
 
+        // Extract video ID if link was entered
+        let start = id.indexOf("?v=")
+        if (start !== -1)
+        {
+            let end = id.indexOf("&")
+            if (end === -1) end = id.length
+
+            id = id.slice(start + 3, end)
+        }
+
         // Create session
         let response = await axios.post("/session", { id })
         let code: string = response.data.id
@@ -74,7 +84,7 @@ class NewVideo extends React.Component<RouteComponentProps, State>
                         <h2>WATCH A VIDEO</h2>
                         <Form
                             title="Create Session"
-                            placeholder="Video ID"
+                            placeholder="Video URL"
                             onSubmit={this.createSession.bind(this)}
                         />
                         <Form
@@ -82,7 +92,7 @@ class NewVideo extends React.Component<RouteComponentProps, State>
                             placeholder="Code"
                             onSubmit={this.joinSession.bind(this)}
                         />
-                        <span className="info">Create a new video session by entering a YouTube video ID, or join through the code displayed in the bottom-left corner of the client.</span>
+                        <span className="info">Create a new video session by entering a YouTube video URL or ID, or join through the code displayed in the bottom-left corner of the client.</span>
                     </div>
                 </div>
             </div>
