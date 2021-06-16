@@ -11,23 +11,16 @@ interface Props
 
 }
 
-class Thumbnail extends React.Component<Props>
+export default function Thumbnail(props: Props): React.ReactElement
 {
-
-    public render(): React.ReactElement
-    {
-        return (
-            <div className="thumbnail">
-                <Link to={`/video?id=${this.props.id}`}>
-                    <div className="thumbnail-content">
-                        <img src={this.props.image} alt="" />
-                        <span>{this.props.title}</span>
-                    </div>
-                </Link>
-            </div>
-        )
-    }
-
+    return (
+        <div className="thumbnail">
+            <Link to={`/video?id=${props.id}`}>
+                <div className="thumbnail-content">
+                    <img src={props.image} alt="" />
+                    <span>{props.title}</span>
+                </div>
+            </Link>
+        </div>
+    )
 }
-
-export default Thumbnail

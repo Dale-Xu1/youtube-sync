@@ -1,40 +1,25 @@
 import axios from "axios"
-import React, { MouseEvent } from "react"
+import React from "react"
 import { RouteComponentProps, withRouter } from "react-router"
 
 import Form from "./Form"
+import Popup from "./Popup"
 
-interface State
+class NewVideo extends React.Component<RouteComponentProps>
 {
+
+    private popup = React.createRef<Popup>()
+    private form = React.createRef<Form>()
     
-    popup: boolean
 
-}
-
-class NewVideo extends React.Component<RouteComponentProps, State>
-{
-
-    public state: State =
+    private show(): void
     {
-        popup: false
+        let popup = this.popup.current!
+        let form = this.form.current!
+
+        popup.show()
+        form.focus()
     }
-
-
-    private showPopup(): void
-    {
-        this.setState({ popup: true })
-    }
-
-    private hidePopup(): void
-    {
-        this.setState({ popup: false })
-    }
-
-    private stopPropagation(e: MouseEvent): void
-    {
-        e.stopPropagation()
-    }
-
 
     private async createSession(id: string): Promise<void>
     {
@@ -66,35 +51,26 @@ class NewVideo extends React.Component<RouteComponentProps, State>
 
     public render(): React.ReactElement
     {
-        let popup = this.state.popup
-
         return (
             <div className="thumbnail">
-                <div className="new" onMouseDown={this.showPopup.bind(this)}>
+                <div className="new" onMouseDown={this.show.bind(this)}>
                     <div className="plus"></div>
                 </div>
-                <div
-                    className={`background${popup ? "" : " hidden"}`}
-                    onMouseDown={this.hidePopup.bind(this)}
-                >
-                    <div
-                        className={`popup${popup ? "" : " popup-hidden"}`}
-                        onMouseDown={this.stopPropagation.bind(this)}
-                    >
-                        <h2>WATCH A VIDEO</h2>
-                        <Form
-                            title="Create Session"
-                            placeholder="Video URL"
-                            onSubmit={this.createSession.bind(this)}
-                        />
-                        <Form
-                            title="Join Session"
-                            placeholder="Code"
-                            onSubmit={this.joinSession.bind(this)}
-                        />
-                        <span className="info">Create a new video session by entering a YouTube video URL or ID, or join through the code displayed in the bottom-left corner of the client.</span>
-                    </div>
-                </div>
+                <Popup ref={this.popup}>
+                    <h2>WATCH A VIDEO</h2>
+                    <Form
+                        title="Create Session"
+                        placeholder="Video URL"
+                        onSubmit={this.createSession.bind(this)}
+                        ref={this.form}
+                    />
+                    <Form
+                        title="Join Session"
+                        placeholder="Code"
+                        onSubmit={this.joinSession.bind(this)}
+                    />
+                    <span className="info">Create a new video session by entering a YouTube video URL or ID, or join through the code displayed in the bottom-left corner of the client.</span>
+                </Popup>
             </div>
         )
     }

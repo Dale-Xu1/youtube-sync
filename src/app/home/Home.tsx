@@ -14,7 +14,7 @@ interface State
 
 }
 
-class Home extends React.Component<{}, State>
+export default class Home extends React.Component<{}, State>
 {
 
     public state: State =
@@ -38,6 +38,7 @@ class Home extends React.Component<{}, State>
         if (this.mounted) this.setState({ thumbnails: response.data })
         else this.state.thumbnails = response.data
     }
+    
 
     public componentDidMount(): void
     {
@@ -64,5 +65,3 @@ class Home extends React.Component<{}, State>
     }
 
 }
-
-export default Home

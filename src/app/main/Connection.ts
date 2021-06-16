@@ -1,6 +1,6 @@
 import { Socket } from "socket.io-client"
 
-class Connection
+export default class Connection
 {
 
     public constructor(private socket: Socket, private player: YT.Player)
@@ -62,5 +62,3 @@ class Connection
     }
     
 }
-
-export default Connection

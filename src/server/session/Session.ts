@@ -2,7 +2,7 @@ import axios from "axios"
 
 import SessionManager from "./SessionManager"
 
-class Session
+export default class Session
 {
 
     public pending = true
@@ -106,5 +106,3 @@ class Session
     }
 
 }
-
-export default Session

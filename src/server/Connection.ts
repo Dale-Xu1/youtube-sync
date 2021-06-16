@@ -13,7 +13,7 @@ export interface InitialData
 
 }
 
-class Connection
+export default class Connection
 {
     
     private room: string
@@ -67,5 +67,3 @@ class Connection
     }
 
 }
-
-export default Connection

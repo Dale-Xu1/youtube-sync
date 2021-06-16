@@ -10,7 +10,7 @@ export interface ThumbnailData
 
 }
 
-class SessionManager
+export default class SessionManager
 {
 
     private static characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
@@ -71,5 +71,3 @@ class SessionManager
     }
 
 }
-
-export default SessionManager

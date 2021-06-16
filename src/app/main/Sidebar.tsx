@@ -18,7 +18,7 @@ interface State
 
 }
 
-class Sidebar extends React.Component<Props, State>
+export default class Sidebar extends React.Component<Props, State>
 {
 
     public state: State =
@@ -62,5 +62,3 @@ class Sidebar extends React.Component<Props, State>
     }
 
 }
-
-export default Sidebar

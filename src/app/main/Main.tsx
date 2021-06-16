@@ -1,6 +1,6 @@
 import query from "query-string"
 import React from "react"
-import { RouteComponentProps, withRouter } from "react-router-dom"
+import { RouteComponentProps, withRouter } from "react-router"
 import { io, Socket } from "socket.io-client"
 
 import "./main.css"
@@ -16,7 +16,7 @@ interface State
 
 }
 
-export class Main extends React.Component<RouteComponentProps, State>
+class Main extends React.Component<RouteComponentProps, State>
 {
 
     public state: State =

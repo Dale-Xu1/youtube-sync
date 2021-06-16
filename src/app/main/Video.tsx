@@ -19,7 +19,7 @@ interface State
 
 }
 
-class Video extends React.Component<Props, State>
+export default class Video extends React.Component<Props, State>
 {
 
     public state: State =
@@ -98,5 +98,3 @@ class Video extends React.Component<Props, State>
     }
 
 }
-
-export default Video

@@ -51,14 +51,17 @@ class App
 
     private connection(socket: Socket): void
     {
-        socket.on("join", (data: JoinData, error: () => void) =>
+        socket.on("join", join)
+
+        let sessions = this.sessions
+        function join(data: JoinData, error: () => void)
         {
             // Initialize connection once user specifies code
-            let session = this.sessions.get(data.code)
+            let session = sessions.get(data.code)
             if (session === null) return void error()
 
             new Connection(socket, session)
-        })
+        }
     }
 
 }

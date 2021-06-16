@@ -92,7 +92,7 @@
     display: flex;
     flex-direction: column;
     width: 330px;
-    padding: 32px 20px;
+    padding: 36px 20px;
     background-color: #252526;
     transition: 0.1s ease-in;
 }
@@ -103,9 +103,12 @@
 }
 
 .popup h2 {
-    align-self: center;
+    align-self: stretch;
     margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444444;
     font-size: 0.9rem;
+    text-align: center;
 }
 
 form {
@@ -155,9 +158,7 @@ form button {
 }
 
 span.info {
-    margin-top: 120px;
-    padding-top: 12px;
-    border-top: 1px solid #444444;
+    margin-top: 132px;
     color: #b8b8b8;
     font-size: 0.8rem;
 }
