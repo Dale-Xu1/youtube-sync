@@ -14,7 +14,7 @@ interface State
 
 }
 
-export default class Home extends React.Component<{}, State>
+export default class Home extends React.Component<object, State>
 {
 
     public state: State =
@@ -25,7 +25,7 @@ export default class Home extends React.Component<{}, State>
     private mounted = false
 
 
-    public constructor(props: {})
+    public constructor(props: object)
     {
         super(props)
         this.fetchData()

@@ -7,7 +7,7 @@ interface State
 
 }
 
-export default class Popup extends React.Component<{}, State>
+export default class Popup extends React.Component<object, State>
 {
 
     public state: State =
@@ -38,11 +38,11 @@ export default class Popup extends React.Component<{}, State>
 
         return (
             <div
-                className={`background${show ? "" : " hidden"}`}
+                className={`background ${show ? "" : "hidden"}`}
                 onMouseDown={this.hide.bind(this)}
             >
                 <div
-                    className={`popup${show ? "" : " popup-hidden"}`}
+                    className={`popup ${show ? "" : "popup-hidden"}`}
                     onMouseDown={this.stopPropagation.bind(this)}
                 >
                     {this.props.children}
