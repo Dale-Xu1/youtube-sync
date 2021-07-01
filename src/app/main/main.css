@@ -29,14 +29,16 @@
     border-top: 1px solid #444444;
 }
 
-.code h3 {
+.code h2 {
     font-size: 0.8rem;
+}
+
+.code .inline {
     margin-right: 6px;
 }
 
 .code .newline {
     display: none;
-    margin-bottom: 2px;
 }
 
 .content {
@@ -74,7 +76,7 @@
     }
 
     .code {
-        flex-direction: column;
+        display: block;
         border: none;
         text-align: right;
     }
@@ -84,11 +86,17 @@
     }
 
     .code .newline {
-        display: inline;
+        display: block;
     }
 
     .video {
         height: auto;
         aspect-ratio: 16 / 9;
+    }
+}
+
+@media screen and (max-height: 320px) {
+    .content {
+        padding: 0;
     }
 }

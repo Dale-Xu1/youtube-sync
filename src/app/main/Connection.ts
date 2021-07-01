@@ -3,7 +3,7 @@ import { Socket } from "socket.io-client"
 export default class Connection
 {
 
-    public constructor(private socket: Socket, private player: YT.Player)
+    public constructor(private socket: Socket, private player: YT.Player, private initial: boolean)
     {
         socket.on("play", this.play.bind(this))
         socket.on("pause", this.pause.bind(this))
@@ -38,7 +38,15 @@ export default class Connection
         {
             case YT.PlayerState.PLAYING:
             {
-                if (!this.ignore) this.socket.emit("play", time)
+                if (this.initial) // Initially pause video
+                {
+                    this.player.pauseVideo()
+                    this.player.setVolume(100)
+
+                    this.initial = false
+                }
+                else if (!this.ignore) this.socket.emit("play", time)
+
                 break
             }
 

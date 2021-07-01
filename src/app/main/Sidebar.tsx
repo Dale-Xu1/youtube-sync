@@ -54,8 +54,8 @@ export default class Sidebar extends React.Component<Props, State>
                     <span>{this.state.users}</span>
                 </div>
                 <div className="code sidebar-container">
-                    <h3 className="inline">CODE:</h3>
-                    <h3 className="newline">CODE</h3>
+                    <h2 className="inline">CODE:</h2>
+                    <h2 className="newline">CODE</h2>
                     <span>{this.props.code}</span>
                 </div>
             </div>

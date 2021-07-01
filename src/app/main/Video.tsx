@@ -48,11 +48,12 @@ export default class Video extends React.Component<Props, State>
     private onReady(event: YT.PlayerEvent): void
     {
         let player = event.target
+        let paused = this.data.paused
 
         // Initialize player
-        if (this.data.paused)
+        if (paused)
         {
-            player.pauseVideo()
+            player.setVolume(0)
             player.seekTo(this.data.time, true)
         }
         else
@@ -62,7 +63,7 @@ export default class Video extends React.Component<Props, State>
             player.seekTo(time, true)
         }
 
-        this.connection = new Connection(this.props.socket, player)
+        this.connection = new Connection(this.props.socket, player, paused)
     }
 
 
