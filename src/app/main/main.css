@@ -34,6 +34,11 @@
     margin-right: 6px;
 }
 
+.code .newline {
+    display: none;
+    margin-bottom: 2px;
+}
+
 .content {
     flex-grow: 1;
     padding: 64px 0;
@@ -46,4 +51,44 @@
 
 .video > div {
     height: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    .sidebar {
+        width: 170px;
+    }
+
+    .content {
+        padding: 36px 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .main {
+        flex-direction: column-reverse;
+    }
+
+    .sidebar {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .code {
+        flex-direction: column;
+        border: none;
+        text-align: right;
+    }
+
+    .code .inline {
+        display: none;
+    }
+
+    .code .newline {
+        display: inline;
+    }
+
+    .video {
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
 }

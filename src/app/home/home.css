@@ -1,3 +1,8 @@
+.home {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .thumbnail {
     width: 25%;
     padding: 8px 8px 24px 8px;
@@ -80,7 +85,7 @@
     top: 0;
     left: 0;
     background-color: #121212b2;
-    transition: 0.1s ease-in;
+    transition: visibility 0.1s ease-in, background-color 0.1s ease-in;
 }
 
 .hidden {
@@ -93,8 +98,9 @@
     flex-direction: column;
     width: 330px;
     padding: 36px 20px;
+    margin: 0 32px;
     background-color: #252526;
-    transition: 0.1s ease-in;
+    transition: transform 0.1s ease-in, opacity 0.1s ease-in;
 }
 
 .popup-hidden {
@@ -161,4 +167,34 @@ span.info {
     margin-top: 132px;
     color: #b8b8b8;
     font-size: 0.8rem;
+}
+
+@media screen and (max-width: 800px) {
+    .thumbnail {
+        width: 33%;
+    }
+
+    .thumbnail-content span {
+        font-size: 0.8rem;
+    }
+    
+    .plus:before {
+        width: 1px;
+    }
+
+    .plus:after {
+        height: 1px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .thumbnail {
+        width: 50%;
+    }
+}
+
+@media screen and (max-height: 450px) {
+    span.info {
+        display: none;
+    }
 }

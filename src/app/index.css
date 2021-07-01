@@ -45,11 +45,6 @@ a {
     overflow-y: auto;
 }
 
-.home {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .container, .not-found {
     max-width: 1250px;
     margin: 0 auto;
@@ -72,4 +67,22 @@ a {
 
 .not-found span {
     color: #aaaaaa;
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        padding: 8px;
+    }
+
+    .not-found {
+        padding: 32px;
+    }
+
+    .not-found h2 {
+        font-size: 1.4rem;
+    }
+
+    .not-found span {
+        font-size: 0.9rem;
+    }
 }
