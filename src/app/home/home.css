@@ -179,10 +179,14 @@ span.info {
     }
     
     .plus:before {
+        top: 10%;
         width: 1px;
+        height: 80%;
     }
 
     .plus:after {
+        left: 10%;
+        width: 80%;
         height: 1px;
     }
 }
