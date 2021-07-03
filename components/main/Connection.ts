@@ -29,7 +29,7 @@ export default class Connection
     }
 
 
-    private ignore = false
+    private ignore = true
 
     private stateChange(event: YT.OnStateChangeEvent): void
     {
@@ -44,9 +44,10 @@ export default class Connection
                     this.player.setVolume(100)
 
                     this.initial = false
+                    return
                 }
-                else if (!this.ignore) this.socket.emit("play", time)
-
+                
+                if (!this.ignore) this.socket.emit("play", time)
                 break
             }
 
