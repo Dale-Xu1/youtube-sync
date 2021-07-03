@@ -21,28 +21,42 @@ interface Props
 
 }
 
-interface State
+class Main extends Component<Props>
 {
 
-    socket: Socket | null
+    private socket: Socket | null = null
+    private code!: string
+    
+    private initialized = false
 
-}
-
-class Main extends Component<Props, State>
-{
-
-    public state: State =
+    
+    public render(): ReactElement | null
     {
-        socket: null
+        if (!this.initialized && this.props.router.isReady) this.initialize()
+
+        if (this.socket === null) return null
+        return (
+            <div className={styles.main}>
+                <Head>
+                    <title>Video - Youtube Synchronized</title>
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
+                <Sidebar socket={this.socket} code={this.code} />
+                <div className={styles.content}>
+                    <Video socket={this.socket} />
+                </div>
+            </div>
+        )
     }
 
-    private code!: string
 
-
-    public componentDidMount(): void
+    private initialize(): void
     {
-        let code = this.props.router.query.id
+        this.initialized = true
 
+        let router = this.props.router
+        let code = router.query.id
+        
         // Select first id
         if (code instanceof Array) code = code[0]
         if (code == null)
@@ -53,40 +67,18 @@ class Main extends Component<Props, State>
         }
         
         // Connect to session
-        let socket = io()
+        this.socket = io()
         
         // Join session
         this.code = code
         let join: JoinData = { code }
 
-        socket.emit("join", join, this.error.bind(this))
-
-        this.setState({ socket })
+        this.socket.emit("join", join, this.error.bind(this))
     }
-
+    
     private error(): void
     {
         this.props.router.push("/")
-    }
-
-    
-    public render(): ReactElement | null
-    {
-        let socket = this.state.socket
-        if (socket === null) return null
-
-        return (
-            <div className={styles.main}>
-                <Head>
-                    <title>Video - Youtube Synchronized</title>
-                    <link rel="icon" href="/favicon.ico" />
-                </Head>
-                <Sidebar socket={socket} code={this.code} />
-                <div className={styles.content}>
-                    <Video socket={socket} />
-                </div>
-            </div>
-        )
     }
 
 }

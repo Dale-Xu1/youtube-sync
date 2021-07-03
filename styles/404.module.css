@@ -1,0 +1,39 @@
+.page {
+    flex-grow: 1;
+}
+
+.notfound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1250px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 64px;
+}
+
+.notfound h1 {
+    font-size: 5rem;
+}
+
+.notfound h2 {
+    margin-bottom: 36px;
+}
+
+.notfound span {
+    color: #aaaaaa;
+}
+
+@media screen and (max-width: 800px) {
+    .notfound {
+        padding: 32px;
+    }
+
+    .notfound h2 {
+        font-size: 1.4rem;
+    }
+
+    .notfound span {
+        font-size: 0.9rem;
+    }
+}

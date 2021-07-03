@@ -4,8 +4,7 @@ import Head from "next/head"
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next"
 import type { ReactElement } from "react"
 
-import app from "../styles/App.module.css"
-import styles from "../styles/Home.module.css"
+import styles from "../styles/home/Home.module.css"
 
 import NewVideo from "../components/home/NewVideo"
 import Thumbnail from "../components/home/Thumbnail"
@@ -30,12 +29,12 @@ export default function Home(props: Props): ReactElement
     }
 
     return (
-        <div className={app.page}>
+        <div className={styles.page}>
             <Head>
                 <title>Youtube Synchronized</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className={`${styles.home} ${app.container}`}>
+            <div className={styles.home}>
                 <NewVideo />
                 {thumbnails}
             </div>

@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 import type { ChangeEvent, FormEvent, ReactElement } from "react"
 
-import styles from "../../styles/Home.module.css"
+import styles from "../../styles/home/Popup.module.css"
 
 interface Props
 {
@@ -67,7 +67,7 @@ export default class Form extends Component<Props, State>
         return (
             <form className={styles.form} onSubmit={this.onSubmit.bind(this)}>
                 <span>{this.props.title}</span>
-                <div className={styles["form-content"]}>
+                <div className={styles.content}>
                     <input
                         type="text"
                         placeholder={this.props.placeholder}

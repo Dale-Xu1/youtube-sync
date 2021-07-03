@@ -2,7 +2,7 @@ import { Component } from "react"
 
 import type { MouseEvent, ReactElement } from "react"
 
-import styles from "../../styles/Home.module.css"
+import styles from "../../styles/home/Popup.module.css"
 
 interface State
 {
@@ -46,7 +46,7 @@ export default class Popup extends Component<object, State>
                 onMouseDown={this.hide.bind(this)}
             >
                 <div
-                    className={`${styles.popup} ${show ? "" : styles["popup-hidden"]}`}
+                    className={`${styles.popup} ${show ? "" : styles.scaled}`}
                     onMouseDown={this.stopPropagation.bind(this)}
                 >
                     {this.props.children}

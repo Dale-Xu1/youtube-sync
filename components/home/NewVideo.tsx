@@ -5,7 +5,7 @@ import React, { Component } from "react"
 import type { NextRouter } from "next/router"
 import type { ReactElement } from "react"
 
-import styles from "../../styles/Home.module.css"
+import styles from "../../styles/home/Home.module.css"
 
 import Form from "./Form"
 import Popup from "./Popup"
