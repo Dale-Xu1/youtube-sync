@@ -13,7 +13,7 @@ import type { InitialData } from "../../server/Connection"
 interface Props
 {
 
-    socket: Socket
+    socket: Socket | null
 
 }
 
@@ -36,15 +36,53 @@ export default class Video extends Component<Props, State>
 
     private start = Date.now()
     private data!: InitialData
+    
+    private initialized = false
 
 
-    public componentDidMount(): void
+    public componentWillUnmount(): void
     {
-        let socket = this.props.socket
-        socket.on("initialize", this.initialize.bind(this))
+        if (this.connection === null) return
+        this.connection.disconnect()
     }
 
-    private initialize(data: InitialData): void
+    public render(): ReactElement
+    {
+        if (!this.initialized) this.initialize()
+
+        let id = this.state.id
+        if (id === null) return <div className={styles.video} />
+
+        return (
+            <div className={styles.video}>
+                <YouTube
+                    videoId={id}
+                    opts={{
+                        width: "100%",
+                        height: "100%",
+                        playerVars: {
+                            autoplay: 1,
+                            modestbranding: 1,
+                            rel: 0
+                        }
+                    }}
+                    onReady={this.onReady.bind(this)}
+                />
+            </div>
+        )
+    }
+
+
+    public initialize(): void
+    {
+        let socket = this.props.socket
+        if (socket === null) return
+
+        socket.on("initialize", this.initializeData.bind(this))
+        this.initialized = true
+    }
+
+    private initializeData(data: InitialData): void
     {
         this.data = data
         this.setState({ id: data.id })
@@ -68,38 +106,8 @@ export default class Video extends Component<Props, State>
             player.seekTo(time, true)
         }
 
-        this.connection = new Connection(this.props.socket, player, paused)
-    }
-
-
-    public componentWillUnmount(): void
-    {
-        if (this.connection === null) return
-        this.connection.disconnect()
-    }
-
-    public render(): ReactElement | null
-    {
-        let id = this.state.id
-        if (id === null) return null
-
-        return (
-            <div className={styles.video}>
-                <YouTube
-                    videoId={id}
-                    opts={{
-                        width: "100%",
-                        height: "100%",
-                        playerVars: {
-                            autoplay: 1,
-                            modestbranding: 1,
-                            rel: 0
-                        }
-                    }}
-                    onReady={this.onReady.bind(this)}
-                />
-            </div>
-        )
+        let socket = this.props.socket!
+        this.connection = new Connection(socket, player, paused)
     }
 
 }

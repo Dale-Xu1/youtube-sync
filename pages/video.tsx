@@ -30,11 +30,10 @@ class Main extends Component<Props>
     private initialized = false
 
     
-    public render(): ReactElement | null
+    public render(): ReactElement
     {
         if (!this.initialized && this.props.router.isReady) this.initialize()
 
-        if (this.socket === null) return null
         return (
             <div className={styles.main}>
                 <Head>

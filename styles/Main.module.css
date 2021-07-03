@@ -11,7 +11,7 @@
     background-color: #252526;
 }
 
-.sidebar-container {
+.container {
     padding: 16px 18px;
 }
 
@@ -49,6 +49,7 @@
 .video {
     width: 100%;
     height: 100%;
+    background-color: #000000;
 }
 
 .video > div {

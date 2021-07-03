@@ -10,7 +10,7 @@ import type { InitialData } from "../../server/Connection"
 interface Props
 {
 
-    socket: Socket
+    socket: Socket | null
     code: string
 
 }
@@ -29,17 +29,40 @@ export default class Sidebar extends Component<Props, State>
     {
         users: null
     }
+    
+    private initialized = false
 
 
-    public componentDidMount(): void
+    public render(): ReactElement
     {
-        let socket = this.props.socket
+        if (!this.initialized && this.props.socket !== null) this.initialize()
+        
+        return (
+            <div className={styles.sidebar}>
+                <div className={styles.container}>
+                    <h2>CONNECTED USERS</h2>
+                    <span>{this.state.users}</span>
+                </div>
+                <div className={`${styles.code} ${styles.container}`}>
+                    <h2 className={styles.inline}>CODE:</h2>
+                    <h2 className={styles.newline}>CODE</h2>
+                    <span>{this.props.code}</span>
+                </div>
+            </div>
+        )
+    }
 
-        socket.on("initialize", this.initialize.bind(this))
+
+    private initialize(): void
+    {
+        let socket = this.props.socket!
+        this.initialized = true
+
+        socket.on("initialize", this.initializeData.bind(this))
         socket.on("users", this.updateUsers.bind(this))
     }
 
-    private initialize(data: InitialData): void
+    private initializeData(data: InitialData): void
     {
         this.updateUsers(data.users)
     }
@@ -47,23 +70,6 @@ export default class Sidebar extends Component<Props, State>
     private updateUsers(users: number): void
     {
         this.setState({ users })
-    }
-
-    public render(): ReactElement
-    {
-        return (
-            <div className={styles.sidebar}>
-                <div className={styles["sidebar-container"]}>
-                    <h2>CONNECTED USERS</h2>
-                    <span>{this.state.users}</span>
-                </div>
-                <div className={`${styles.code} ${styles["sidebar-container"]}`}>
-                    <h2 className={styles.inline}>CODE:</h2>
-                    <h2 className={styles.newline}>CODE</h2>
-                    <span>{this.props.code}</span>
-                </div>
-            </div>
-        )
     }
 
 }
