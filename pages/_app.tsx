@@ -6,15 +6,17 @@ import type { ReactElement } from "react"
 import "../styles/globals.css"
 import styles from "../styles/App.module.css"
 
-export default function App({ Component, pageProps }: AppProps): ReactElement
+export default function App(props: AppProps): ReactElement
 {
+    let Component = props.Component
+
     return (
         <div className={styles.app}>
             <div className={styles.header}>
                 <Link href="/">Home</Link>
                 <Link href="/about">About</Link>
             </div>
-            <Component {...pageProps} />
+            <Component {...props.pageProps} />
         </div>
     )
 }
