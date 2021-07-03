@@ -6,6 +6,6 @@ import App from "./App"
 dotenv.config()
 
 let port = process.env.PORT!
-let dev = process.env.NODE_ENV === "development"
+let dev = process.env.NODE_ENV !== "production"
 
 new App(port, dev)

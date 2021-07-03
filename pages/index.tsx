@@ -1,15 +1,15 @@
 import axios from "axios"
 import Head from "next/head"
 
-import type { GetServerSidePropsResult } from "next"
+import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next"
 import type { ReactElement } from "react"
 
 import app from "../styles/App.module.css"
 import styles from "../styles/Home.module.css"
-import App from "../server/App"
 
 import NewVideo from "../components/home/NewVideo"
 import Thumbnail from "../components/home/Thumbnail"
+import origin from "../components/origin"
 
 import type { ThumbnailData } from "../server/session/SessionManager"
 
@@ -43,9 +43,9 @@ export default function Home(props: Props): ReactElement
     )
 }
 
-export async function getServerSideProps(): Promise<GetServerSidePropsResult<Props>>
+export async function getServerSideProps(context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<Props>>
 {
-    let response = await axios.get("http://localhost:5000/sessions")
+    let response = await axios.get(origin(context.req, "/sessions"))
     let thumbnails = response.data
 
     return { props: { thumbnails } }
