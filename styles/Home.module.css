@@ -117,17 +117,17 @@
     text-align: center;
 }
 
-form {
+.form {
     display: flex;
     flex-direction: column;
 }
 
-form span {
+.form span {
     margin: 20px 0 7px 0;
     font-size: 0.8rem;
 }
 
-form input {
+.form input {
     flex-grow: 1;
     background-color: #383b3d;
     border: none;
@@ -135,15 +135,15 @@ form input {
     padding: 4px 6px;
 }
 
-form input::placeholder {
+.form input::placeholder {
     color: #969696;
 }
 
-form input:focus {
+.form input:focus {
     outline: 1px solid #66a7f1;
 }
 
-form button {
+.form button {
     width: 24px;
     margin-left: -24px;
     border: none;

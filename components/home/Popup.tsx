@@ -1,4 +1,8 @@
-import React, { MouseEvent } from "react"
+import { Component } from "react"
+
+import type { MouseEvent, ReactElement } from "react"
+
+import styles from "../../styles/Home.module.css"
 
 interface State
 {
@@ -7,7 +11,7 @@ interface State
 
 }
 
-export default class Popup extends React.Component<object, State>
+export default class Popup extends Component<object, State>
 {
 
     public state: State =
@@ -32,17 +36,17 @@ export default class Popup extends React.Component<object, State>
     }
 
 
-    public render(): React.ReactElement
+    public render(): ReactElement
     {
         let show = this.state.show
 
         return (
             <div
-                className={`background ${show ? "" : "hidden"}`}
+                className={`${styles.background} ${show ? "" : styles.hidden}`}
                 onMouseDown={this.hide.bind(this)}
             >
                 <div
-                    className={`popup ${show ? "" : "popup-hidden"}`}
+                    className={`${styles.popup} ${show ? "" : styles["popup-hidden"]}`}
                     onMouseDown={this.stopPropagation.bind(this)}
                 >
                     {this.props.children}

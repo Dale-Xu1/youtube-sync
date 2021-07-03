@@ -1,7 +1,11 @@
-import React from "react"
-import { Socket } from "socket.io-client"
+import { Component } from "react"
 
-import { InitialData } from "../../server/Connection"
+import type { ReactElement } from "react"
+import type { Socket } from "socket.io-client"
+
+import styles from "../../styles/Main.module.css"
+
+import type { InitialData } from "../../server/Connection"
 
 interface Props
 {
@@ -18,7 +22,7 @@ interface State
 
 }
 
-export default class Sidebar extends React.Component<Props, State>
+export default class Sidebar extends Component<Props, State>
 {
 
     public state: State =
@@ -45,17 +49,17 @@ export default class Sidebar extends React.Component<Props, State>
         this.setState({ users })
     }
 
-    public render(): React.ReactElement
+    public render(): ReactElement
     {
         return (
-            <div className="sidebar">
-                <div className="sidebar-container">
+            <div className={styles.sidebar}>
+                <div className={styles["sidebar-container"]}>
                     <h2>CONNECTED USERS</h2>
                     <span>{this.state.users}</span>
                 </div>
-                <div className="code sidebar-container">
-                    <h2 className="inline">CODE:</h2>
-                    <h2 className="newline">CODE</h2>
+                <div className={`${styles.code} ${styles["sidebar-container"]}`}>
+                    <h2 className={styles.inline}>CODE:</h2>
+                    <h2 className={styles.newline}>CODE</h2>
                     <span>{this.props.code}</span>
                 </div>
             </div>

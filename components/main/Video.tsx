@@ -1,9 +1,14 @@
-import React from "react"
+import { Component } from "react"
 import YouTube from "react-youtube"
-import { Socket } from "socket.io-client"
 
-import { InitialData } from "../../server/Connection"
+import { ReactElement } from "react"
+import type { Socket } from "socket.io-client"
+
+import styles from "../../styles/Main.module.css"
+
 import Connection from "./Connection"
+
+import type { InitialData } from "../../server/Connection"
 
 interface Props
 {
@@ -19,7 +24,7 @@ interface State
 
 }
 
-export default class Video extends React.Component<Props, State>
+export default class Video extends Component<Props, State>
 {
 
     public state: State =
@@ -72,15 +77,14 @@ export default class Video extends React.Component<Props, State>
         if (this.connection === null) return
         this.connection.disconnect()
     }
-    
 
-    public render(): React.ReactElement | null
+    public render(): ReactElement | null
     {
         let id = this.state.id
         if (id === null) return null
 
         return (
-            <div className="video">
+            <div className={styles.video}>
                 <YouTube
                     videoId={id}
                     opts={{

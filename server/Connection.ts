@@ -1,6 +1,6 @@
-import { Socket } from "socket.io"
+import type { Socket } from "socket.io"
 
-import Session from "./session/Session"
+import type Session from "./session/Session"
 
 export interface InitialData
 {

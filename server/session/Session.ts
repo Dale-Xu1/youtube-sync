@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import SessionManager from "./SessionManager"
+import type SessionManager from "./SessionManager"
 
 export default class Session
 {

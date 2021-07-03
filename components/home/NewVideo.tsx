@@ -1,11 +1,23 @@
 import axios from "axios"
-import React from "react"
-import { RouteComponentProps, withRouter } from "react-router"
+import { withRouter } from "next/router"
+import React, { Component } from "react"
+
+import type { NextRouter } from "next/router"
+import type { ReactElement } from "react"
+
+import styles from "../../styles/Home.module.css"
 
 import Form from "./Form"
 import Popup from "./Popup"
 
-class NewVideo extends React.Component<RouteComponentProps>
+interface Props
+{
+
+    router: NextRouter
+
+}
+
+class NewVideo extends Component<Props>
 {
 
     private popup = React.createRef<Popup>()
@@ -45,16 +57,16 @@ class NewVideo extends React.Component<RouteComponentProps>
     private joinSession(code: string): void
     {
         if (code.length === 0) return
-        this.props.history.push(`/video?id=${code}`)
+        this.props.router.push(`/video?id=${code}`)
     }
 
 
-    public render(): React.ReactElement
+    public render(): ReactElement
     {
         return (
-            <div className="thumbnail">
-                <div className="new" onMouseDown={this.show.bind(this)}>
-                    <div className="plus"></div>
+            <div className={styles.thumbnail}>
+                <div className={styles.new} onMouseDown={this.show.bind(this)}>
+                    <div className={styles.plus}></div>
                 </div>
                 <Popup ref={this.popup}>
                     <h2>WATCH A VIDEO</h2>
@@ -69,7 +81,7 @@ class NewVideo extends React.Component<RouteComponentProps>
                         placeholder="Code"
                         onSubmit={this.joinSession.bind(this)}
                     />
-                    <span className="info">Create a new video session by entering a YouTube video URL or ID, or join through the code displayed in the bottom-left corner of the client.</span>
+                    <span className={styles.info}>Create a new video session by entering a YouTube video URL or ID, or join through the code displayed in the bottom-left corner of the client.</span>
                 </Popup>
             </div>
         )

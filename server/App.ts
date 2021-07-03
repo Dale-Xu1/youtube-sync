@@ -1,6 +1,9 @@
-import express, { Request, Response } from "express"
-import dotenv from "dotenv"
-import { Server, Socket } from "socket.io"
+import express from "express"
+import next from "next"
+import { Server } from "socket.io"
+
+import type { Request, Response } from "express"
+import type { Socket } from "socket.io"
 
 import SessionManager from "./session/SessionManager"
 import Connection from "./Connection"
@@ -12,22 +15,39 @@ export interface JoinData
 
 }
 
-class App
+export default class App
 {
 
     private app = express()
-    private io: Server
+    private io!: Server
 
     private sessions = new SessionManager()
 
 
-    public constructor(port: string | number)
+    public constructor(port: string | number, dev: boolean)
     {
-        this.app.use(express.static("build"))
+        this.initialize(port, dev)
+    }
+
+    private async initialize(port: string | number, dev: boolean): Promise<void>
+    {
+        // Initialize Next app
+        let app = next({ dev })
+        let handler = app.getRequestHandler()
+
+        await app.prepare()
+
+        // Initialize Express server
         this.app.use(express.json())
 
         this.app.get("/sessions", this.getSessions.bind(this))
         this.app.post("/session", this.createSession.bind(this))
+
+        this.app.all("*", handleAll)
+        function handleAll(req: Request, res: Response): void
+        {
+            handler(req, res)
+        }
 
         // Start server
         let server = this.app.listen(port)
@@ -65,10 +85,3 @@ class App
     }
 
 }
-
-// Initialize server
-dotenv.config()
-let port = process.env.PORT!
-
-new App(port)
-console.log(`Server running on port ${port}`)

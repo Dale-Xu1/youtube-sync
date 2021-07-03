@@ -1,4 +1,8 @@
-import React, { ChangeEvent, FormEvent } from "react"
+import React, { Component } from "react"
+
+import type { ChangeEvent, FormEvent, ReactElement } from "react"
+
+import styles from "../../styles/Home.module.css"
 
 interface Props
 {
@@ -17,7 +21,7 @@ interface State
 
 }
 
-export default class Form extends React.Component<Props, State>
+export default class Form extends Component<Props, State>
 {
 
     public state: State =
@@ -58,12 +62,12 @@ export default class Form extends React.Component<Props, State>
     }
 
 
-    public render(): React.ReactElement
+    public render(): ReactElement
     {
         return (
-            <form onSubmit={this.onSubmit.bind(this)}>
+            <form className={styles.form} onSubmit={this.onSubmit.bind(this)}>
                 <span>{this.props.title}</span>
-                <div className="form-content">
+                <div className={styles["form-content"]}>
                     <input
                         type="text"
                         placeholder={this.props.placeholder}
@@ -72,7 +76,7 @@ export default class Form extends React.Component<Props, State>
                         ref={this.input}
                     />
                     <button type="submit">
-                        <i className="arrow" />
+                        <i className={styles.arrow} />
                     </button>
                 </div>
             </form>
