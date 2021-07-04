@@ -32,16 +32,22 @@
     font-size: 0.9rem;
 }
 
+.select {
+    cursor: pointer;
+}
+
 .new {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #252526;
-    transition: background-color 0.1s ease-in;
-    cursor: pointer;
 }
 
-.new:hover {
+.new, .text {
+    background-color: #252526;
+    transition: background-color 0.1s ease-in;
+}
+
+.select:hover .new, .select:hover .text {
     background-color: #303031;
 }
 
@@ -74,7 +80,6 @@
 .text {
     width: 80%;
     height: 0.9rem;
-    background-color: #252526;
     margin-top: 8px;
 }
 

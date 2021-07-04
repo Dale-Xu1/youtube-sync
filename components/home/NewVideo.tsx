@@ -3,10 +3,11 @@ import { withRouter } from "next/router"
 import React, { Component } from "react"
 
 import type { NextRouter } from "next/router"
-import type { ReactElement } from "react"
+import type { MouseEvent, ReactElement } from "react"
 
 import styles from "../../styles/home/Home.module.css"
 
+import Button from "./Button"
 import Form from "./Form"
 import Popup from "./Popup"
 
@@ -24,8 +25,10 @@ class NewVideo extends Component<Props>
     private form = React.createRef<Form>()
     
 
-    private show(): void
+    private show(e: MouseEvent): void
     {
+        if (e.buttons !== Button.LEFT) return
+
         let popup = this.popup.current!
         let form = this.form.current!
 
@@ -65,10 +68,15 @@ class NewVideo extends Component<Props>
     {
         return (
             <div className={styles.thumbnail}>
-                <div className={styles.new} onMouseDown={this.show.bind(this)}>
-                    <div className={styles.plus}></div>
+                <div
+                    className={styles.select}
+                    onMouseDown={this.show.bind(this)}
+                >
+                    <div className={styles.new}>
+                        <div className={styles.plus}></div>
+                    </div>
+                    <div className={styles.text}></div>
                 </div>
-                <div className={styles.text}></div>
                 <Popup ref={this.popup}>
                     <h2>WATCH A VIDEO</h2>
                     <Form
