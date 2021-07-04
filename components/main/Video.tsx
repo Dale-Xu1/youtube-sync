@@ -1,21 +1,14 @@
 import { Component } from "react"
 import YouTube from "react-youtube"
 
-import { ReactElement } from "react"
-import type { Socket } from "socket.io-client"
+import type { ReactElement } from "react"
 
 import styles from "../../styles/Main.module.css"
 
 import Connection from "./Connection"
+import MainContext, { MainContextType } from "./MainContext"
 
 import type { InitialData } from "../../server/Connection"
-
-interface Props
-{
-
-    socket: Socket | null
-
-}
 
 interface State
 {
@@ -24,13 +17,17 @@ interface State
 
 }
 
-export default class Video extends Component<Props, State>
+export default class Video extends Component<object, State>
 {
+
+    public static contextType = MainContext
+
 
     public state: State =
     {
         id: null
     }
+    public context!: MainContextType
 
     private connection: Connection | null = null
 
@@ -75,7 +72,7 @@ export default class Video extends Component<Props, State>
 
     public initialize(): void
     {
-        let socket = this.props.socket
+        let socket = this.context.socket
         if (socket === null) return
 
         socket.on("initialize", this.initializeData.bind(this))
@@ -106,7 +103,7 @@ export default class Video extends Component<Props, State>
             player.seekTo(time, true)
         }
 
-        let socket = this.props.socket!
+        let socket = this.context.socket!
         this.connection = new Connection(socket, player, paused)
     }
 

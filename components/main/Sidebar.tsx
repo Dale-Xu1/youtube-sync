@@ -1,16 +1,17 @@
 import { Component } from "react"
 
 import type { ReactElement } from "react"
-import type { Socket } from "socket.io-client"
 
 import styles from "../../styles/Main.module.css"
 
+import MainContext from "./MainContext"
+
 import type { InitialData } from "../../server/Connection"
+import type { MainContextType } from "./MainContext"
 
 interface Props
 {
 
-    socket: Socket | null
     code: string
 
 }
@@ -25,17 +26,21 @@ interface State
 export default class Sidebar extends Component<Props, State>
 {
 
+    public static contextType = MainContext
+
+
     public state: State =
     {
         users: null
     }
+    public context!: MainContextType
     
     private initialized = false
 
 
     public render(): ReactElement
     {
-        if (!this.initialized && this.props.socket !== null) this.initialize()
+        if (!this.initialized && this.context.socket !== null) this.initialize()
         
         return (
             <div className={styles.sidebar}>
@@ -55,7 +60,7 @@ export default class Sidebar extends Component<Props, State>
 
     private initialize(): void
     {
-        let socket = this.props.socket!
+        let socket = this.context.socket!
         this.initialized = true
 
         socket.on("initialize", this.initializeData.bind(this))

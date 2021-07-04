@@ -9,6 +9,7 @@ import type { Socket } from "socket.io-client"
 
 import styles from "../styles/Main.module.css"
 
+import MainContext from "../components/main/MainContext"
 import Sidebar from "../components/main/Sidebar"
 import Video from "../components/main/Video"
 
@@ -33,17 +34,19 @@ class Main extends Component<Props>
     public render(): ReactElement
     {
         if (!this.initialized && this.props.router.isReady) this.initialize()
-
+        
         return (
             <div className={styles.main}>
                 <Head>
                     <title>Video - Youtube Synchronized</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-                <Sidebar socket={this.socket} code={this.code} />
-                <div className={styles.content}>
-                    <Video socket={this.socket} />
-                </div>
+                <MainContext.Provider value={{ socket: this.socket }}>
+                    <Sidebar code={this.code} />
+                    <div className={styles.content}>
+                        <Video />
+                    </div>
+                </MainContext.Provider>
             </div>
         )
     }
