@@ -68,6 +68,7 @@ class NewVideo extends Component<Props>
                 <div className={styles.new} onMouseDown={this.show.bind(this)}>
                     <div className={styles.plus}></div>
                 </div>
+                <div className={styles.text}></div>
                 <Popup ref={this.popup}>
                     <h2>WATCH A VIDEO</h2>
                     <Form

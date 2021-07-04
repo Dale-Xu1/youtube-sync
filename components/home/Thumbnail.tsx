@@ -19,7 +19,7 @@ export default function Thumbnail(props: Props): ReactElement
     return (
         <div className={styles.thumbnail}>
             <Link href={`/video?id=${props.id}`}>
-                <div className={styles["thumbnail-content"]}>
+                <div className={styles.content}>
                     <img src={props.image} alt="" />
                     <span>{props.title}</span>
                 </div>
