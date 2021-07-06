@@ -5,7 +5,7 @@ import React, { Component } from "react"
 import type { NextRouter } from "next/router"
 import type { MouseEvent, ReactElement } from "react"
 
-import styles from "../../styles/home/Home.module.css"
+import styles from "../../styles/home/Home.module.scss"
 
 import Button from "./Button"
 import Form from "./Form"

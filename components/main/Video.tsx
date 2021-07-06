@@ -3,7 +3,7 @@ import YouTube from "react-youtube"
 
 import type { ReactElement } from "react"
 
-import styles from "../../styles/Main.module.css"
+import styles from "../../styles/Main.module.scss"
 
 import Connection from "./Connection"
 import MainContext, { MainContextType } from "./MainContext"

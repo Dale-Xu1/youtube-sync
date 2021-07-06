@@ -2,7 +2,7 @@ import Head from "next/head"
 
 import type { ReactElement } from "react"
 
-import styles from "../styles/404.module.css"
+import styles from "../styles/404.module.scss"
 
 export default function NotFound(): ReactElement
 {

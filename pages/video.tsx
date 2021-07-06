@@ -7,7 +7,7 @@ import type { NextRouter } from "next/router"
 import type { ReactElement } from "react"
 import type { Socket } from "socket.io-client"
 
-import styles from "../styles/Main.module.css"
+import styles from "../styles/Main.module.scss"
 
 import MainContext from "../components/main/MainContext"
 import Sidebar from "../components/main/Sidebar"

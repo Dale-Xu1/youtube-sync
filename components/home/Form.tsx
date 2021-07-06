@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 import type { ChangeEvent, FormEvent, ReactElement } from "react"
 
-import styles from "../../styles/home/Popup.module.css"
+import styles from "../../styles/home/Popup.module.scss"
 
 interface Props
 {

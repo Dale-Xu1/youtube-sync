@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import type { ReactElement } from "react"
 
-import styles from "../../styles/home/Home.module.css"
+import styles from "../../styles/home/Home.module.scss"
 
 interface Props
 {

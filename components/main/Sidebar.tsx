@@ -2,7 +2,7 @@ import { Component } from "react"
 
 import type { ReactElement } from "react"
 
-import styles from "../../styles/Main.module.css"
+import styles from "../../styles/Main.module.scss"
 
 import MainContext from "./MainContext"
 

@@ -4,7 +4,7 @@ import Head from "next/head"
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next"
 import type { ReactElement } from "react"
 
-import styles from "../styles/home/Home.module.css"
+import styles from "../styles/home/Home.module.scss"
 
 import NewVideo from "../components/home/NewVideo"
 import Thumbnail from "../components/home/Thumbnail"

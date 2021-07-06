@@ -2,7 +2,7 @@ import { Component } from "react"
 
 import type { MouseEvent, ReactElement } from "react"
 
-import styles from "../../styles/home/Popup.module.css"
+import styles from "../../styles/home/Popup.module.scss"
 
 interface State
 {

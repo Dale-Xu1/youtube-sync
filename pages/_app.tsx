@@ -3,8 +3,8 @@ import Link from "next/link"
 import type { AppProps } from "next/app"
 import type { ReactElement } from "react"
 
-import "../styles/globals.css"
-import styles from "../styles/App.module.css"
+import "../styles/globals.scss"
+import styles from "../styles/App.module.scss"
 
 export default function App(props: AppProps): ReactElement
 {
